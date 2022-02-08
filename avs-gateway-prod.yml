@@ -1,0 +1,43 @@
+spring:              
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      routes:
+        - id: avs-core
+          uri: http://10.200.8.6:6001
+          predicates:
+            - Path=/avs-core/**
+          filters:
+            - StripPrefix=1
+        - id: avs-sms
+          uri: http://10.200.8.6:6002
+          predicates:
+            - Path=/avs-sms/**
+          filters:
+            - StripPrefix=1
+        - id: avs-airtime
+          uri: http://10.200.8.6:6003
+          predicates:
+            - Path=/avs-airtime/**
+          filters:
+            - StripPrefix=1
+        - id: avs-contact
+          uri: http://10.200.8.6:6004
+          predicates:
+            - Path=/avs-contact/**
+          filters:
+            - StripPrefix=1       
+        - id: avs-report
+          uri: http://10.200.8.6:6005
+          predicates:
+            - Path=/avs-report/**
+          filters:
+            - StripPrefix=1
+
+server:
+  port: 6007
